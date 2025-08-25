@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tutoring with Joseph</title>
+  <style>
+    /* Reset some styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      color: #fff;
+      text-align: center;
+      background: #222; /* Default background if no image is uploaded */
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+    }
+
+    .profile-placeholder {
+      width: 200px;
+      height: 200px;
+      border: 3px dashed #fff;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      background: rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin-bottom: 30px;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    }
+
+    .upload-btn {
+      background: #fff;
+      color: #222;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .upload-btn:hover {
+      background: #ddd;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tutoring with Joseph</h1>
+  <div class="profile-placeholder">Your Photo</div>
+  <p>
+    Tutoring for kids grades 5–12 in Math and grades 1–12 in English.<br>
+    Specializing in Calculus, AP Calculus, and bootcamp-style calculus curriculums.
+  </p>
+
+  <label for="bgUpload" class="upload-btn">Upload Background</label>
+  <input type="file" id="bgUpload" accept="image/*">
+
+  <script>
+    // Script to set background from uploaded image
+    const bgUpload = document.getElementById('bgUpload');
+    bgUpload.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          document.body.style.backgroundImage = `url('${event.target.result}')`;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+
+</body>
+</html>
