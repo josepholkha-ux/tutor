@@ -1,104 +1,295 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tutoring with Joseph</title>
-  <style>
-    /* Reset some styles */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Private Tutoring with Joseph – Pico Area, Los Angeles</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Lato', sans-serif;
+        background: url('backround.jpg') no-repeat center center fixed;
+        background-size: cover;
+        color: #222;
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      color: #fff;
-      text-align: center;
-      background: #222; /* Default background if no image is uploaded */
-      background-size: cover;
-      background-position: center;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
+    .overlay {
+        background-color: rgba(0,0,0,0.55);
+        min-height: 100vh;
+        padding: 60px 30px;
+        color: #fff;
+    }
+
+    /* Header & Profile */
+    .header {
+        text-align: left;
+        margin-bottom: 50px;
+    }
+
+    .profile-container {
+        display: flex;
+        justify-content: center; /* circle stays centered */
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    /* Circle wrapper with overflow hidden */
+    .profile-wrapper {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+        position: relative;
+    }
+
+    /* High-res image shifted 20% left inside the circle */
+    .profile-img {
+        width: 114%;
+        height: 100%;
+        object-fit: cover;
+        position: relative;
+        left: -14%; /* shift image inside circle */
     }
 
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.7);
+        font-family: 'Playfair Display', serif;
+        font-size: 3rem;
+        font-weight: 700;
+        margin: 0;
+        letter-spacing: 0.5px;
     }
 
-    .profile-placeholder {
-      width: 200px;
-      height: 200px;
-      border: 3px dashed #fff;
-      border-radius: 50%;
-      margin-bottom: 20px;
-      background: rgba(255,255,255,0.1);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1rem;
+    h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 2rem;
+        font-weight: 600;
+        margin-top: 50px;
+        margin-bottom: 20px;
+        letter-spacing: 0.5px;
     }
 
-    p {
-      font-size: 1.2rem;
-      max-width: 600px;
-      margin-bottom: 30px;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+    .card {
+        background: rgba(255,255,255,0.95);
+        color: #222;
+        padding: 25px 30px;
+        border-radius: 15px;
+        margin-bottom: 25px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .upload-btn {
-      background: #fff;
-      color: #222;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.3s;
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0,0,0,0.25);
     }
 
-    .upload-btn:hover {
-      background: #ddd;
+    .description, .bio {
+        font-size: 1.15rem;
+        line-height: 1.75;
     }
 
-    input[type="file"] {
-      display: none;
+    .highlight {
+        font-weight: 700;
+        color: #1abc9c;
     }
-  </style>
+
+    .contact a {
+        text-decoration: none;
+        margin-right: 20px;
+        display: inline-flex;
+        align-items: center;
+        color: #fff;
+        font-weight: 700;
+        transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .contact a:hover {
+        color: #1abc9c;
+        transform: translateY(-2px);
+    }
+
+    .contact img {
+        width: 28px;
+        height: 28px;
+        margin-right: 8px;
+    }
+
+    .faq-section details {
+        background: rgba(255,255,255,0.9);
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-bottom: 12px;
+        transition: all 0.3s ease;
+        color: #222;
+    }
+
+    details[open] {
+        background: rgba(255,255,255,1);
+    }
+
+    summary {
+        font-family: 'Playfair Display', serif;
+        font-weight: 600;
+        font-size: 1.2rem;
+        cursor: pointer;
+        outline: none;
+    }
+
+    summary:hover {
+        color: #1abc9c;
+    }
+
+    .faq-content {
+        margin-top: 10px;
+        font-size: 1rem;
+        line-height: 1.65;
+    }
+
+    /* Subject Icons */
+    .subject {
+        display: flex;
+        align-items: flex-start;
+        margin-top: 15px;
+    }
+
+    .subject img {
+        width: 36px;
+        height: 36px;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
+
+    .subject div {
+        line-height: 1.6;
+        font-size: 1.15rem;
+    }
+
+    /* Schedule button */
+    .schedule-btn {
+        display: inline-block;
+        padding: 12px 25px;
+        background-color: #1abc9c;
+        color: #fff;
+        font-weight: 700;
+        border-radius: 12px;
+        text-decoration: none;
+        margin-top: 15px;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .schedule-btn:hover {
+        background-color: #159b82;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px){
+        h1 { font-size: 2.2rem; }
+        h2 { font-size: 1.6rem; }
+        .description, .bio { font-size: 1.05rem; }
+        .overlay { padding: 40px 20px; }
+        .profile-wrapper { width: 150px; height: 150px; }
+        .profile-img { left: -15%; }
+    }
+</style>
 </head>
 <body>
+    <div class="overlay">
+        <div class="header">
+            <!-- Profile Image Section -->
+            <div class="profile-container">
+                <div class="profile-wrapper">
+                    <img src="profile.jpg" alt="Joseph Olkha" class="profile-img">
+                </div>
+            </div>
 
-  <h1>Tutoring with Joseph</h1>
-  <div class="profile-placeholder">Your Photo</div>
-  <p>
-    Tutoring for kids grades 5–12 in Math and grades 1–12 in English.<br>
-    Specializing in Calculus, AP Calculus, and bootcamp-style calculus curriculums.
-  </p>
+            <h1>Private Tutoring with Joseph – Pico Area, Los Angeles</h1>
+        </div>
 
-  <label for="bgUpload" class="upload-btn">Upload Background</label>
-  <input type="file" id="bgUpload" accept="image/*">
+        <div class="card description">
+            I am a third-year <span class="highlight">Astrophysics major</span> with a deep passion for both learning and teaching. My long-term goal is to pursue a <span class="highlight">PhD</span> in my field and become a <span class="highlight">professor</span>, dedicating my life to research and inspiring students. Tutoring allows me to share my love for <span class="highlight">mathematics</span> and problem-solving while helping students build the confidence and skills they need to succeed.
+        </div>
 
-  <script>
-    // Script to set background from uploaded image
-    const bgUpload = document.getElementById('bgUpload');
-    bgUpload.addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          document.body.style.backgroundImage = `url('${event.target.result}')`;
-        }
-        reader.readAsDataURL(file);
-      }
-    });
-  </script>
+        <!-- Limited Availability -->
+        <div class="card" style="text-align:center;">
+            <span class="highlight">Limited Availability:</span> I have a small number of slots each week to ensure personalized attention. Early booking is recommended to secure a session.
+        </div>
 
+        <div class="card bio">
+            <!-- Mathematics Section -->
+            <div class="subject" id="math-section">
+                <img src="math-icon.png" alt="Mathematics Icon">
+                <div>
+                    <strong>Mathematics:</strong> I tutor at elementary, middle school, high school, and college levels. I have performed very well in advanced courses such as calculus and focus on developing strong problem-solving skills.
+                </div>
+            </div>
+
+            <!-- English Section -->
+            <div class="subject" id="english-section">
+                <img src="english-icon.png" alt="English Icon">
+                <div>
+                    <strong>English:</strong> I tutor reading and writing up through 8th grade.
+                </div>
+            </div>
+        </div>
+
+        <div class="contact">
+            <h2>Contact Me</h2>
+            <a href="tel:+12136087473"><img src="phone-icon.png" alt="Phone"> Call</a>
+            <a href="https://wa.me/12136087473" target="_blank"><img src="whatsapp-icon.png" alt="WhatsApp"> WhatsApp</a>
+            <a href="sms:+12136087473"><img src="imessage-icon.png" alt="iMessage"> iMessage</a>
+        </div>
+
+        <div class="faq-section">
+            <h2>Frequently Asked Questions</h2>
+
+            <details>
+                <summary>What is your rate?</summary>
+                <div class="faq-content">
+                    My tutoring rates are personalized for each client and situation to ensure the best value.
+                </div>
+            </details>
+
+            <details>
+                <summary>Do you offer online/Zoom tutoring?</summary>
+                <div class="faq-content">
+                    Not currently, but if enough interest is shown, I am open to offering online sessions in the future.
+                </div>
+            </details>
+
+            <details>
+                <summary>How does your tutoring style work?</summary>
+                <div class="faq-content">
+                    I work closely with students to ensure they build both confidence and a strong understanding of concepts at their grade level. My approach emphasizes patience, clarity, and interactive learning. I also use tools such as a miniature whiteboard to help explain and visualize complex ideas.<br><br>
+                    I communicate regularly with parents to provide updates on their child’s progress, highlighting areas where they excel as well as areas that may need additional attention. I firmly encourage students to take responsibility for their own learning: when a subject becomes challenging, it is important that they review material that was unclear and communicate questions openly. While I provide guidance and support, students must do their part to study and engage with the material to achieve success.
+                </div>
+            </details>
+
+            <details>
+                <summary>Where do you tutor?</summary>
+                <div class="faq-content">
+                    I am based in the Pico area of Los Angeles and primarily offer in-home private tutoring. In some cases, I am also happy to meet at local libraries—preferably ones with study rooms—if travel distance makes home visits difficult.
+                </div>
+            </details>
+
+            <details>
+                <summary>Do you offer SAT or standardized test prep?</summary>
+                <div class="faq-content">
+                    At this time, I do not offer SAT tutoring. However, if enough interest is shown, I plan to provide this in the future.
+                </div>
+            </details>
+        </div>
+
+        <!-- Bottom Contact Prompt -->
+        <div class="card" style="text-align:center; font-size:1.15rem; margin-top:40px;">
+            <span>For any additional questions or inquiries, <span class="highlight">feel free to contact me</span> anytime. I’m happy to discuss your child’s needs and how I can help them succeed!</span><br>
+            <a href="https://wa.me/12136087473" class="schedule-btn" target="_blank">Schedule a Session</a>
+        </div>
+
+    </div>
 </body>
 </html>
